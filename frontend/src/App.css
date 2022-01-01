@@ -1,0 +1,159 @@
+.App {
+    text-align: center;
+}
+
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+.App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table {
+    margin: 10px auto;
+}
+
+th, td {
+    padding: 7px;
+}
+
+th {
+    background-color: #a09fc7;
+}
+
+tr:nth-child(odd) {
+    background-color: #d6d5f2;
+}
+
+tr:hover {
+    background-color: #fcef79;
+}
+
+nav {
+    display: block;
+    width: auto;
+    margin: 0 auto 30px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.navbar {
+    background: #fcef79;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+
+    display: flex;
+
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+
+    flex-direction: row;
+    height: 40px;
+    text-align: center;
+    font: 15px Arial, Helvetica, sans-serif;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.navbar__item {
+    display: inline-block;
+    padding: 1em;
+    width: 200px;
+    background: rgba(177, 152, 145, .3);
+    border-right: 1px solid #b19891;
+    color: #695753;
+}
+
+.navbar__item:hover {
+    background: #b19891;
+}
+
+footer {
+    padding: 80px 60px;
+    background: #fcef79;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+h1, h3 {
+    text-align: center;
+
+}
+
+h3 {
+    margin-top: -50px;
+}
+
+.container {
+    padding: 0 15px;
+}
+
+@media (min-width: 575.98px) {
+    .container {
+        max-width: 540px;
+        margin: auto;
+        padding: 0;
+    }
+}
+
+@media (min-width: 767.98px) {
+    .container {
+        max-width: 720px;
+    }
+}
+
+@media (min-width: 991.98px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+@media (min-width: 1199.98px) {
+    .container {
+        max-width: 1140px;
+    }
+}
