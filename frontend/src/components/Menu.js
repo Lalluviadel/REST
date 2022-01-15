@@ -1,12 +1,13 @@
 import React from 'react'
 import '../App.css';
 
+
 class Menu extends React.Component {
     render() {
         let links = [
             'Home',
-            'Мой профиль',
-            'Мои проекты'
+            'TODOs',
+            'Projects'
         ]
         return (<ul className={'navbar'}>
             {links.map((value, index) => {

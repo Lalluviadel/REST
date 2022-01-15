@@ -24,3 +24,6 @@ class User(AbstractUser):
         choices=CATEGORY_CHOICES,
         default=DEVELOPERS,
     )
+
+    def __str__(self):
+        return f'{self.first_name} "{self.username}" {self.last_name}'

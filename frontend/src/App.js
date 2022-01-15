@@ -1,27 +1,50 @@
 import React from 'react';
 import './App.css';
+import './upd.css';
 import UserList from './components/Users.js';
 import axios from 'axios';
 import Menu from "./components/Menu";
 import Footer from "./components/Footer";
+import ProjectList from "./components/Projects";
+import ToDoList from "./components/ToDo";
 
+
+function getUsers() {
+    return axios.get('http://127.0.0.1:8000/api/users');
+}
+
+function getProjects() {
+    return axios.get('http://127.0.0.1:8000/api/projects');
+}
+
+function getTodos() {
+    return axios.get('http://127.0.0.1:8000/api/todos/');
+}
 
 class App extends React.Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            'users': []
+            'users': [],
+            'projects': [],
+            'todos': [],
         }
     };
 
+
     componentDidMount() {
-        axios.get('http://127.0.0.1:8000/api/users')
+        axios.all([getUsers(), getProjects(), getTodos()]
+        )
             .then(response => {
-                const users = response.data
+                const users = response[0].data
+                const projects = response[1].data
+                const todos = response[2].data
                 this.setState(
                     {
-                        'users': users
+                        'users': users,
+                        'projects': projects,
+                        'todos': todos
                     }
                 )
             }).catch(error => console.log(error))
@@ -30,16 +53,26 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <nav>
-                    <Menu />
+                <nav className={'navbar navbar-expand'}>
+                    <Menu/>
                 </nav>
-                <h1> Наши юзеры: </h1>
-                <div className={'content'}>
-                    <UserList users={this.state.users}/>
-                </div>
-
-                <Footer />
-
+                <main>
+                    <div className={'container-fluid'}>
+                        <div className={'center-me'}> Пользователи:</div>
+                        <div className={'flex-row'}>
+                            <UserList users={this.state.users}/>
+                        </div>
+                        <div className={'center-me'}> Проекты:</div>
+                        <div className={'flex-row'}>
+                            <ProjectList projects={this.state.projects}/>
+                        </div>
+                        <div className={'center-me'}> Заметки:</div>
+                        <div className={'flex-row'}>
+                            <ToDoList todos={this.state.todos}/>
+                        </div>
+                    </div>
+                </main>
+                <Footer/>
             </div>
         )
     };
