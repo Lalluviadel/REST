@@ -1,26 +1,38 @@
-from rest_framework.serializers import ModelSerializer, StringRelatedField
+from rest_framework.serializers import ModelSerializer, StringRelatedField, HyperlinkedModelSerializer
+
+from users.models import User
 from .models import Project, TODO
 
 
 class ProjectModelSerializer(ModelSerializer):
-    users = StringRelatedField(many=True)
+    # users = StringRelatedField(many=True)
 
     class Meta:
         model = Project
-        fields = '__all__'
+        fields = ('url', 'id', 'name',  'users', 'prj_url')
+
+    def to_representation(self, instance):
+        my_representation = super().to_representation(instance)
+        usernames = ''
+        for user in my_representation['users']:
+            u_name = User.objects.get(id=user).username
+            usernames += u_name + ' '
+        my_representation['users'] = usernames
+        return my_representation
 
 
-class TodoModelSerializer(ModelSerializer):
+class TodoModelSerializer(HyperlinkedModelSerializer):
     author = StringRelatedField()
-    project = StringRelatedField()
+    # project = StringRelatedField()
 
     class Meta:
         model = TODO
-        fields = '__all__'
+        fields = ('project', 'author', 'body', 'created_on', 'updated_on', 'is_active', 'url')
 
     def to_representation(self, instance):
-        """Overriding the to_representation method for better date output"""
+        """Overriding the to_representation method for better is_active output"""
         my_representation = super().to_representation(instance)
-        my_representation['created_on'] = instance.created_on.strftime("%d.%m.%Y %H:%M:%S")
-        my_representation['updated_on'] = instance.updated_on.strftime("%d.%m.%Y %H:%M:%S")
+        my_representation['author'] = instance.author.username
+        my_representation['project'] = instance.project.name
+        my_representation['is_active'] = 'В работе' if my_representation['is_active'] else 'Закрыт'
         return my_representation
