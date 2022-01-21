@@ -8,7 +8,7 @@ const ProjectItem = ({project}) => {
                 {project.name}
             </td>
             <td>
-                {project.url}
+                {project.prj_url}
             </td>
             <td>
                 {project.users}

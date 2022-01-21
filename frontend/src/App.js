@@ -37,9 +37,10 @@ class App extends React.Component {
         axios.all([getUsers(), getProjects(), getTodos()]
         )
             .then(response => {
-                const users = response[0].data
-                const projects = response[1].data
-                const todos = response[2].data
+                console.log(response[0].data.results)
+                const users = response[0].data.results
+                const projects = response[1].data.results
+                const todos = response[2].data.results
                 this.setState(
                     {
                         'users': users,
