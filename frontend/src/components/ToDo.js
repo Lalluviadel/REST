@@ -5,8 +5,9 @@ const ToDoItem = ({todo}) => {
     let act;
     if (todo.is_active) {
         act = 'В работе'
-    }else{
-        act = 'Завершен'}
+    } else {
+        act = 'Завершен'
+    }
     return (
         <tr>
             <td>
@@ -33,27 +34,38 @@ const ToDoItem = ({todo}) => {
 
 const ToDoList = ({todos}) => {
     return (
-        <table>
-            <th>
-                Проект
-            </th>
-            <th>
-                Текст заметки
-            </th>
-            <th>
-                Создан
-            </th>
-            <th>
-                Обновлен
-            </th>
-            <th>
-                Автор
-            </th>
-            <th>
-                В работе/Закрыта
-            </th>
-            {todos.map((todo) => <ToDoItem todo={todo}/>)}
-        </table>
+        <div>
+            <div className={'center-me'}> Заметки:</div>
+            <div className={'flex-row'}>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>
+                            Проект
+                        </th>
+                        <th>
+                            Текст заметки
+                        </th>
+                        <th>
+                            Создан
+                        </th>
+                        <th>
+                            Обновлен
+                        </th>
+                        <th>
+                            Автор
+                        </th>
+                        <th>
+                            В работе/Закрыта
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {todos.map((todo) => <ToDoItem todo={todo}/>)}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     )
 }
 

@@ -1,11 +1,12 @@
 import React from 'react'
+import {Link} from "react-router-dom";
 
 
 const ProjectItem = ({project}) => {
     return (
         <tr>
             <td>
-                {project.name}
+                <Link to={`/project/${project.name}`}>{project.name}</Link>
             </td>
             <td>
                 {project.prj_url}
@@ -19,18 +20,29 @@ const ProjectItem = ({project}) => {
 
 const ProjectList = ({projects}) => {
     return (
-        <table>
-            <th>
-                Название
-            </th>
-            <th>
-                Ссылка
-            </th>
-            <th>
-                Участники
-            </th>
-            {projects.map((project) => <ProjectItem project={project}/>)}
-        </table>
+        <div>
+            <div className={'center-me'}> Проекты:</div>
+            <div className={'flex-row'}>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>
+                            Название
+                        </th>
+                        <th>
+                            Ссылка
+                        </th>
+                        <th>
+                            Участники
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {projects.map((project) => <ProjectItem project={project}/>)}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     )
 }
 
