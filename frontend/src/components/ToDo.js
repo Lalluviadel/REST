@@ -35,8 +35,8 @@ const ToDoItem = ({todo}) => {
 const ToDoList = ({todos}) => {
     return (
         <div>
-            <div className={'center-me'}> Заметки:</div>
-            <div className={'flex-row'}>
+            <h1>Заметки:</h1>
+            <div className={'logout'}>
                 <table>
                     <thead>
                     <tr>

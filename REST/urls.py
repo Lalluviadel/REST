@@ -16,11 +16,11 @@ router.register('projects', ProjectModelViewSet)
 router.register('todos', TodoModelViewSet)
 
 urlpatterns = [
+    path('api-token-auth/', views.obtain_auth_token),
+
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
-
-    path('api-token-auth/', views.obtain_auth_token),
 
     # path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     # path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),

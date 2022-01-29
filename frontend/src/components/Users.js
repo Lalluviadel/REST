@@ -26,8 +26,8 @@ const UserItem = ({user}) => {
 const UserList = ({users}) => {
     return (
         <div>
-            <div className={'center-me'}> Пользователи:</div>
-            <div className={'flex-row'}>
+            <h1>Пользователи:</h1>
+            <div className={'logout'}>
                 <table>
                     <thead>
                     <tr>

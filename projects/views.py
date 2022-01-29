@@ -1,5 +1,3 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import JSONRenderer, AdminRenderer
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
@@ -20,24 +18,21 @@ class ToDoPagination(LimitOffsetPagination):
     default_limit = 20
 
 
-class ProjectModelViewSet(LoginRequiredMixin, PartialUpdateMixin, ModelViewSet):
+class ProjectModelViewSet(PartialUpdateMixin, ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectModelSerializer
     renderer_classes = [JSONRenderer, AdminRenderer]
     pagination_class = ProjectPagination
     filterset_class = ProjectFilter
-
     permission_classes = (ProjectCategoryPermission,)
 
 
-class TodoModelViewSet(LoginRequiredMixin, ModelViewSet):
+class TodoModelViewSet(ModelViewSet):
     queryset = TODO.objects.all()
     serializer_class = TodoModelSerializer
     renderer_classes = [JSONRenderer, AdminRenderer]
     pagination_class = ToDoPagination
     filterset_class = ToDoFilter
-
-    permission_classes = [IsAuthenticated]
 
     def destroy(self, request, *args, **kwargs):
         """A note is not deleted but becomes inactive"""

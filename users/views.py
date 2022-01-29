@@ -1,4 +1,3 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework.renderers import JSONRenderer, AdminRenderer
 
 from REST.permissions import UserCategoryPermission
@@ -7,7 +6,7 @@ from .serializers import UserModelSerializer
 from rest_framework import mixins, viewsets
 
 
-class UserCustomViewSet(LoginRequiredMixin, mixins.ListModelMixin, mixins.RetrieveModelMixin,
+class UserCustomViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,
                         mixins.UpdateModelMixin, viewsets.GenericViewSet):
     queryset = User.objects.all()
     serializer_class = UserModelSerializer
