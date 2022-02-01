@@ -16,7 +16,7 @@ class ProjectModelSerializer(ModelSerializer):
         usernames = ''
         for user in my_representation['users']:
             u_name = User.objects.get(id=user).username
-            usernames += u_name + ' '
+            usernames += u_name + ', '
         my_representation['users'] = usernames
         return my_representation
 

@@ -7,13 +7,16 @@ class UserCategoryPermission(permissions.BasePermission):
         - admins - all;"""
 
     def has_permission(self, request, view):
-        if request.user.category == 'AD':
-            return True
-        else:
-            if request.method in permissions.SAFE_METHODS:
+        try:
+            if request.user.category == 'AD':
                 return True
             else:
-                return False
+                if request.method in permissions.SAFE_METHODS:
+                    return True
+                else:
+                    return False
+        except AttributeError:
+            return False
 
 
 class ProjectCategoryPermission(permissions.BasePermission):
@@ -22,10 +25,13 @@ class ProjectCategoryPermission(permissions.BasePermission):
         - admins and project managers - all;"""
 
     def has_permission(self, request, view):
-        if request.user.category == 'AD' or request.user.category == 'PM':
-            return True
-        else:
-            if request.method in permissions.SAFE_METHODS:
+        try:
+            if request.user.category == 'AD' or request.user.category == 'PM':
                 return True
             else:
-                return False
+                if request.method in permissions.SAFE_METHODS:
+                    return True
+                else:
+                    return False
+        except AttributeError:
+            return False
