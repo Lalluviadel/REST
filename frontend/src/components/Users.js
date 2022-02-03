@@ -19,6 +19,12 @@ const UserItem = ({user}) => {
             <td>
                 {user.email}
             </td>
+            <td>
+                {user.is_staff}
+            </td>
+            <td>
+                {user.is_superuser}
+            </td>
         </tr>
     )
 }
@@ -45,6 +51,12 @@ const UserList = ({users}) => {
                         </th>
                         <th>
                             Email
+                        </th>
+                        <th>
+                            is_staff
+                        </th>
+                        <th>
+                            is_superuser
                         </th>
                     </tr>
                     </thead>
