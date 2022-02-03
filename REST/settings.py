@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'users',
     'projects',
-
+    'drf_yasg2',
+    # 'drf_spectacular',
     # 'rest_framework_simplejwt',
 ]
 
