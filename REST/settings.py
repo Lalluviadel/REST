@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'users',
     'projects',
     'drf_yasg2',
+    'graphene_django',
     # 'drf_spectacular',
     # 'rest_framework_simplejwt',
 ]
@@ -152,3 +153,7 @@ REST_FRAMEWORK = {
 
 LOGIN_URL = '/api-auth/login/'
 LOGOUT_REDIRECT_URL = '/api/'
+
+GRAPHENE = {
+    "SCHEMA": "REST.schema.schema"
+}
