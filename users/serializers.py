@@ -14,7 +14,7 @@ class UserAccessModelSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ('url', 'username', 'first_name', 'last_name', 'category', 'email',
-                  'is_staff', 'is_superuser')
+                  'is_staff', 'is_superuser', 'id')
 
     def to_representation(self, instance):
         """Overriding the to_representation method for is_staff and is_superuser output"""

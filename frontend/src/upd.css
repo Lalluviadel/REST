@@ -21,7 +21,7 @@ footer {
     justify-content: space-between;
 }
 
-button {
+button, .btn {
     background-color: black;
     color: white;
     font-size: 20px;
@@ -31,10 +31,51 @@ button {
     cursor: pointer;
 }
 
-.center-me{
+.center-me {
     text-align: center;
 }
 
-.white-text{
+.white-text {
     color: whitesmoke;
+}
+
+
+.field {
+    width: 50%;
+    height: 36px;
+    border-radius: 4px;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: 0.3s all;
+}
+
+.field-multiple{
+    height: 90px !important;
+}
+
+.field:hover {
+    background-color: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: #1a2b3d;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #1a2b3d;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #1a2b3d;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #1a2b3d;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+   color:    #1a2b3d;
+}
+
+::placeholder {
+   color:    #1a2b3d;
 }

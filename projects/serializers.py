@@ -24,11 +24,11 @@ class ProjectModelSerializer(ModelSerializer):
 class TodoModelSerializer(HyperlinkedModelSerializer):
     author = StringRelatedField()
     # project = StringRelatedField()
-    project = ProjectModelSerializer()
+    # project = ProjectModelSerializer()
 
     class Meta:
         model = TODO
-        fields = ('project', 'author', 'body', 'created_on', 'updated_on', 'is_active', 'url')
+        fields = ('project', 'author', 'body', 'created_on', 'updated_on', 'is_active', 'url', 'id')
 
     def to_representation(self, instance):
         """Overriding the to_representation method for better is_active output"""

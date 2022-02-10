@@ -1,13 +1,8 @@
 import React from 'react'
+import {Link} from "react-router-dom";
 
 
-const ToDoItem = ({todo}) => {
-    let act;
-    if (todo.is_active) {
-        act = 'В работе'
-    } else {
-        act = 'Завершен'
-    }
+const ToDoItem = ({todo, deleteToDo}) => {
     return (
         <tr>
             <td>
@@ -26,16 +21,24 @@ const ToDoItem = ({todo}) => {
                 {todo.author}
             </td>
             <td>
-                {act}
+                {todo.is_active}
+            </td>
+            <td>
+                <button onClick={() => deleteToDo(todo.id)} type='button'>Delete</button>
             </td>
         </tr>
     )
 }
 
-const ToDoList = ({todos}) => {
+const ToDoList = ({todos, deleteToDo}) => {
     return (
         <div>
             <h1>Заметки:</h1>
+            <Link to='/todos/create'>
+                <button>
+                    <span>Новая заметка</span>
+                </button>
+            </Link>
             <div className={'logout'}>
                 <table>
                     <thead>
@@ -58,10 +61,12 @@ const ToDoList = ({todos}) => {
                         <th>
                             В работе/Закрыта
                         </th>
+                        <th>
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
-                    {todos.map((todo) => <ToDoItem todo={todo}/>)}
+                    {todos.map((todo) => <ToDoItem todo={todo} deleteToDo={deleteToDo}/>)}
                     </tbody>
                 </table>
             </div>

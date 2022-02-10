@@ -13,6 +13,8 @@ import LoginForm from "./components/Auth";
 import Home from "./components/Home";
 import NotFound404 from "./components/NotFound";
 import Footer from "./components/Footer";
+import ProjectForm from "./components/ProjectForm";
+import ToDoForm from "./components/ToDoForm";
 
 
 class App extends React.Component {
@@ -58,7 +60,6 @@ class App extends React.Component {
 
     get_headers() {
         let headers = {
-            // 'Content-Type': 'application/json',
             'Accept': 'application/json; version=2.0'
         }
         if (this.is_authenticated()) {
@@ -98,6 +99,49 @@ class App extends React.Component {
         this.get_token_from_storage()
     };
 
+    deleteProject(id) {
+        const headers = this.get_headers()
+        axios.delete(`http://127.0.0.1:8000/api/projects/${id}`, {headers: headers})
+            .then(response => {
+                this.setState({projects: this.state.projects.filter((item) => item.id !== id)})
+            }).catch(error => console.log(error))
+        window.location = '/projects/';
+    }
+
+    deleteToDo(id) {
+        const headers = this.get_headers()
+        axios.delete(`http://127.0.0.1:8000/api/todos/${id}`, {headers: headers})
+            .then(response => {
+                this.setState({todos: this.state.todos})
+            }).catch(error => console.log(error))
+        window.location = '/todos/';
+    }
+
+    createProject(name, prj_url, users) {
+        const headers = this.get_headers()
+        const data = {name: name, prj_url: prj_url, users: users}
+        axios.post(`http://127.0.0.1:8000/api/projects/`, data, {headers: headers})
+            .then(response => {
+                let new_project = response.data
+                new_project.users = this.state.users.filter((item) => item.id === new_project.users)[0]
+                this.setState({projects: [...this.state.projects, new_project]})
+            }).catch(error => console.log(error))
+        window.location = '/projects/';
+    }
+
+    createToDo(body, project) {
+        const headers = this.get_headers()
+        const url_project = 'http://127.0.0.1:8000/api/projects/' + project + '/'
+        const data = {body: body, project: url_project}
+        axios.post(`http://127.0.0.1:8000/api/todos/`, data, {headers: headers})
+            .then(response => {
+                let new_todo = response.data
+                new_todo.project = this.state.project.filter((item) => item.id === new_todo.project)[0]
+                this.setState({todos: [...this.state.todos, new_todo]})
+            }).catch(error => console.log(error))
+        window.location = '/todos/';
+    }
+
     render() {
         return (
             <div>
@@ -118,20 +162,21 @@ class App extends React.Component {
                                     </button>
                                 </Link>
                             }
-
                         </div>
                         <Routes>
                             <Route path='/users' element={<UserList users={this.state.users}/>}/>} />
-                            <Route path='/todos' element={<ToDoList todos={this.state.todos}/>}/>} />
-                            <Route path='/projects' element={<ProjectList projects={this.state.projects}/>}/>
+                            <Route path='/todos' element={<ToDoList todos={this.state.todos}
+                                                                    deleteToDo={(id) => this.deleteToDo(id)}/>}/>
+                            <Route path='/projects' element={<ProjectList projects={this.state.projects}
+                                                                          deleteProject={(id) => this.deleteProject(id)}/>}/>
                             <Route path="/project/:name" element={<OneProjectToDoList items={this.state.todos}/>}/>
                             <Route path='/home' element={<Home/>}/>
 
+                            <Route exact path='/projects/create' element={<ProjectForm all_users={this.state.users} createProject={(name, prj_url, users) => this.createProject (name, prj_url, users)} />}  />
+                            <Route exact path='/todos/create' element={<ToDoForm projects={this.state.projects} createToDo={(body, project) => this.createToDo (body, project)} />}  />
 
                             <Route exact path='/login' element={<LoginForm
                                 get_token={(username, password) => this.get_token(username, password)}/>}/>
-
-
                             <Route path="/" element={<Navigate replace to="/home"/>}/>
                             <Route path='*' element={<NotFound404/>}/>
                         </Routes>
