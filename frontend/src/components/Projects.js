@@ -21,8 +21,8 @@ const ProjectItem = ({project}) => {
 const ProjectList = ({projects}) => {
     return (
         <div>
-            <div className={'center-me'}> Проекты:</div>
-            <div className={'flex-row'}>
+            <h1>Проекты:</h1>
+            <div className={'logout'}>
                 <table>
                     <thead>
                     <tr>
@@ -38,7 +38,7 @@ const ProjectList = ({projects}) => {
                     </tr>
                     </thead>
                     <tbody>
-                        {projects.map((project) => <ProjectItem project={project}/>)}
+                    {projects.map((project) => <ProjectItem project={project}/>)}
                     </tbody>
                 </table>
             </div>

@@ -1,14 +1,13 @@
 import React from 'react'
 import '../App.css';
 
-
 class Menu extends React.Component {
     render() {
         let links = [
             'Home',
             'TODOs',
             'Projects',
-            'Users'
+            'Users',
         ]
         return (<ul className={'navbar'}>
             {links.map((value, index) => {
@@ -16,7 +15,7 @@ class Menu extends React.Component {
                     <Link value={value}/>
                 </li>)
             })}
-        </ul>
+            </ul>
         )}
 }
 

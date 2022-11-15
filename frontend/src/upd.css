@@ -3,7 +3,38 @@ footer {
     text-align: center;
 }
 
-.center-me{
+
+.main-block {
+    height: 86vh;
+    min-height: 100%;
+    background-color: #004653;
     display: flex;
-    justify-content: center
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.logout {
+    background-color: #004653;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+button {
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    padding: 10px 60px;
+    border-radius: 5px;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.center-me{
+    text-align: center;
+}
+
+.white-text{
+    color: whitesmoke;
 }
