@@ -1,18 +1,12 @@
 import React from "react";
-import '../App.css';
 
 const Footer = () => {
     return (
-        <footer>
-            <h3>
-                Учебный проект с использованием архитектурного стиля REST
-            </h3>
+        <nav className={'navbar navbar-fixed-bottom'}>
             <div className={'container'}>
-                <div>
-                    © Copyright 2021 Lalluviadeljulio
-                </div>
+                <p className={'center-me'}>Copyright &copy; Lalluviadel 2022</p>
             </div>
-        </footer>
+        </nav>
     );
 };
 
