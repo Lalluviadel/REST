@@ -7,7 +7,8 @@ class Menu extends React.Component {
         let links = [
             'Home',
             'TODOs',
-            'Projects'
+            'Projects',
+            'Users'
         ]
         return (<ul className={'navbar'}>
             {links.map((value, index) => {

@@ -5,8 +5,11 @@ import UserList from './components/Users.js';
 import axios from 'axios';
 import Menu from "./components/Menu";
 import Footer from "./components/Footer";
+import Home from "./components/Home";
 import ProjectList from "./components/Projects";
+import OneProjectToDoList from "./components/OneProject";
 import ToDoList from "./components/ToDo";
+import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom'
 
 
 function getUsers() {
@@ -37,9 +40,9 @@ class App extends React.Component {
         axios.all([getUsers(), getProjects(), getTodos()]
         )
             .then(response => {
-                const users = response[0].data
-                const projects = response[1].data
-                const todos = response[2].data
+                const users = response[0].data.results
+                const projects = response[1].data.results
+                const todos = response[2].data.results
                 this.setState(
                     {
                         'users': users,
@@ -53,26 +56,24 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <nav className={'navbar navbar-expand'}>
-                    <Menu/>
-                </nav>
-                <main>
-                    <div className={'container-fluid'}>
-                        <div className={'center-me'}> Пользователи:</div>
-                        <div className={'flex-row'}>
-                            <UserList users={this.state.users}/>
+                <BrowserRouter>
+                    <nav className={'navbar navbar-expand'}>
+                        <Menu/>
+                    </nav>
+                    <main>
+                        <div className={'container-fluid'}>
+                            <Routes>
+                                <Route path='/users' element={<UserList users={this.state.users}/>}/>} />
+                                <Route path='/todos' element={<ToDoList todos={this.state.todos}/>}/>} />
+                                <Route path='/projects' element={<ProjectList projects={this.state.projects}/>}/>
+                                <Route path="/project/:name" element={<OneProjectToDoList items={this.state.todos}/>}/>
+                                <Route path='/home' element={<Home/>}/>
+                                <Route path="/" element={<Navigate replace to="/home"/>}/>
+                            </Routes>
                         </div>
-                        <div className={'center-me'}> Проекты:</div>
-                        <div className={'flex-row'}>
-                            <ProjectList projects={this.state.projects}/>
-                        </div>
-                        <div className={'center-me'}> Заметки:</div>
-                        <div className={'flex-row'}>
-                            <ToDoList todos={this.state.todos}/>
-                        </div>
-                    </div>
-                </main>
-                <Footer/>
+                    </main>
+                    <Footer/>
+                </BrowserRouter>
             </div>
         )
     };

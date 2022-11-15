@@ -25,24 +25,35 @@ const UserItem = ({user}) => {
 
 const UserList = ({users}) => {
     return (
-        <table>
-            <th>
-                Username
-            </th>
-            <th>
-                First name
-            </th>
-            <th>
-                Last Name
-            </th>
-            <th>
-                Category
-            </th>
-            <th>
-                Email
-            </th>
-            {users.map((user) => <UserItem user={user}/>)}
-        </table>
+        <div>
+            <div className={'center-me'}> Пользователи:</div>
+            <div className={'flex-row'}>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>
+                            Username
+                        </th>
+                        <th>
+                            First name
+                        </th>
+                        <th>
+                            Last Name
+                        </th>
+                        <th>
+                            Category
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {users.map((user) => <UserItem user={user} key={user.id}/>)}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     )
 }
 
