@@ -14,5 +14,5 @@ class Command(BaseCommand):
         for project in projects:
 
             users = User.objects.filter(username__in=project[2])
-            instance = Project.objects.create(name=project[0], url=project[1])
+            instance = Project.objects.create(name=project[0], prj_url=project[1])
             instance.users.set(users)
